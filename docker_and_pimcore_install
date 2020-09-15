@@ -1,5 +1,36 @@
 // Docker Container anlegen //
 
-1. Neuer Ordner in einem Verzeichnis anlegen. Bsp: demo_installation
-2. Files reinkopieren .docker & docker-compose.yml
-3. docker-compose.yml in PHPStorm anpassen -> container_name mit eindeutigem Namen vergeben. Bsp: demo_installation // Befehl + R: Replace all
+  1. Neuer Ordner in einem Verzeichnis anlegen. Bsp: demo_installation
+  2. Files reinkopieren .docker & docker-compose.yml
+  3. docker-compose.yml in PHPStorm anpassen -> container_name mit eindeutigem Namen vergeben. Bsp: demo_installation // Befehl + R: Replace all
+  4. docker im entsprechenden Verzeichnis Bsp: /demo_installation starten: docker-compose up
+  
+Docker wird nun gestartet und falls nicht geschehen auch installiert
+
+Der Docker Container ist nun ready für die Pimcore-Installation
+
+// Pimcore im Docker-Container installieren //
+  1. Docker muss laufen, falls nicht im Verzeichnis starten: docker-compose up
+  2. Neue Konsole öffnen und ins PHP-Verzeichnis wechseln: docker-compose exec php bash
+  3. Im PHP-Verzeichnis angelangt – sichtbar über /var/www/html – kann Pimcore heruntergeladen werden. Befehl über Google / Pimcore-Seite suchen.
+  4. Hier die aktuellen Befehle:
+      DEMO-Pimcore mit Files:     COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo my-project
+      Skeleton:     COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/skeleton my-project
+  5. Nach der Installation kann über PHPStorm die Files aus my-project eine Ebene höher verschoben werden in bsp: demo_installation. Indexierung abwarten, bevor verschoben wird. Beim Verschieben Checkbox «Search for References» deaktivieren
+      ACHTUNG: im Verzeichnis my-project/docker-compose.yml das File löschen. Da dieses schon eine Ebene höher ist und mit unseren Einstellungen versehen ist.
+  6. Im PHP-Verzeichnis dann folgenden Befehl ausführen. Mit diesem Schritt wird die Datenbank etc. befüllt:
+      vendor/bin/pimcore-install --ignore-existing-config --admin-username admin --admin-password admin --mysql-username pimcore --mysql-database pimcore --mysql-host-socket db --mysql-password pimcore --mysql-port 3306 --no-interaction
+  7. Docker nochmals sicherheitshalber neu starten.
+      In der Docker-Console: ctrl+C oder eine neue Konsole docker-compose down
+  8. Docker neu starten und im Browser localhost aufrufen
+      localhost:2000 -> Pimcore
+      localhost:2001 -> Datenbank
+      
+      
+// Debuging Infos //
+  1. Cache leeren:
+      im PHP -> docker-compose exec php bash -> bin/console -> gibt alle Befehle aus
+      bin/console ca:cl (cache clear) bzw. bin/console pi:ca:cl (pimcore cache clear) löscht den Cache
+  2. Composer updaten:
+       im PHP -> docker-compose exec php bash -> composer update -> Alles im vendor-Ordner wird upgedatet
+       
