@@ -1,0 +1,5 @@
+// Docker Container anlegen //
+
+1. Neuer Ordner in einem Verzeichnis anlegen. Bsp: demo_installation
+2. Files reinkopieren .docker & docker-compose.yml
+3. docker-compose.yml in PHPStorm anpassen -> container_name mit eindeutigem Namen vergeben. Bsp: demo_installation // Befehl + R: Replace all
