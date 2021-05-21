@@ -34,3 +34,8 @@ Der Docker Container ist nun ready für die Pimcore-Installation
   2. Composer updaten:
        im PHP -> docker-compose exec php bash -> composer update -> Alles im vendor-Ordner wird upgedatet
        
+       
+       
+       ./vendor/bin/pimcore-install --mysql-host-socket
+
+       
