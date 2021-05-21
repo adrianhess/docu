@@ -36,6 +36,6 @@ Der Docker Container ist nun ready für die Pimcore-Installation
        
        
        
-       ./vendor/bin/pimcore-install --mysql-host-socket
+       ./vendor/bin/pimcore-install --mysql-host-socket db
 
        
