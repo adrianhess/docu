@@ -82,3 +82,9 @@ In the layout file there has to be a code fragment: {{ block('content') }} where
 </body>
 </html>
 
+
+----
+Object / Class Infos
+
+every generated class is generated as PHP class and located in: var/classes/DataObject/
+----
