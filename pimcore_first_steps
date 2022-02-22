@@ -1,0 +1,53 @@
+----
+Create a controller
+  -> /src/Controller
+Class Name has to be the same name as the controller. Actually logic ;)
+
+
+Create a blank public function in this controller
+----
+
+namespace App\Controller;
+
+use Pimcore\Controller\FrontendController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+
+
+class Academy2022Controller extends FrontendController
+{
+    /**
+     * @Template()
+     */
+    public function academyAction(Request $request)
+    {
+
+        return [];
+
+    }
+}
+
+
+
+----
+Create a Template
+  -> /templates
+  
+In the /templates folder create another folder with the name of the controller above in (snake_case). For the example above academy2022
+in the /academy2022 folder put a Twig template which has the name of the action also in snake_case. For the example above academy.html.twig
+----
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ pimcore_input("headline", {"width": 540}) }}</h1>
+
+    {% for i in pimcore_iterate_block(pimcore_block('contentblock')) %}
+        <h2>{{ pimcore_input('subline') }}</h2>
+        {{ pimcore_wysiwyg('content') }}
+    {% endfor %}
+{% endblock %}
+
+
+
+
