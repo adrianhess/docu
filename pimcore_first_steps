@@ -50,4 +50,35 @@ in the /academy2022 folder put a Twig template which has the name of the action 
 
 
 
+----
+Create a Layout
+  -> /templates
+  
+In the root of the /templates folder create a layout template. In this case, we name it layout.html.twig
+This layout gets extended by the template above with the code: {% extends 'layout.html.twig' %}
+In the layout file there has to be a code fragment: {{ block('content') }} where the template code from above comes in.
+----
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/global.css" />
+</head>
+<body>
+    <div id="site">
+        <div id="logo">
+            <a href="http://www.pimcore.org/"><img src="/bundles/pimcoreadmin/img/logo-gray.svg" style="width: 200px;" /></a>
+            <hr />
+            <div class="claim">
+                THE OPEN-SOURCE ENTERPRISE PLATFORM FOR PIM, CMS, DAM & COMMERCE
+            </div>
+        </div>
+        <div class="info">
+            {{ block('content') }}
+        </div>
+    </div>
+</body>
+</html>
 
