@@ -37,5 +37,24 @@ Der Docker Container ist nun ready für die Pimcore-Installation
        
        
        ./vendor/bin/pimcore-install --mysql-host-socket db
+       
+       
+       
+// Install PimcoreX with Docker
+
+# run composer create-project within an docker container (to have php and composer available)
+docker run --rm -v `pwd`:/var/www/html pimcore/pimcore:PHP8.0-apache composer create-project pimcore/skeleton:10.0.x-dev my-project 
+
+# switch into the project directory
+cd my-project
+
+# start docker compose environment
+docker-compose up -d
+
+# start Pimcore installation in docker-compose environment
+docker-compose exec php vendor/bin/pimcore-install --mysql-host-socket=db --mysql-username=pimcore --mysql-password=pimcore --mysql-database=pimcore 
+
+# fix file permissions
+docker-compose exec php chown -R www-data:www-data . 
 
        
